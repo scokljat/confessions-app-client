@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Paper, TextField, Typography, Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { Paper, TextField, Button } from "@material-ui/core";
 import { createPost } from "../../actions/posts";
 import useStyles from "./styles";
 
