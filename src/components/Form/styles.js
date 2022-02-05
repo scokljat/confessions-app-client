@@ -12,6 +12,7 @@ export default makeStyles((theme) => ({
   },
   form: {
     display: "flex",
+    flexDirection: "column",
     flexWrap: "wrap",
     justifyContent: "center",
   },

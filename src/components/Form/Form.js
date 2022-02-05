@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Paper, TextField, Button } from "@material-ui/core";
+import { useForm } from "react-hook-form";
+import { Paper, TextField, Button, Typography } from "@material-ui/core";
 import { createPost } from "../../actions/posts";
 import useStyles from "./styles";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 function Form() {
   const [postData, setPostData] = useState({
     description: " ",
@@ -11,11 +13,25 @@ function Form() {
   });
   const classes = useStyles();
   const dispatch = useDispatch();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createPost(postData));
-    clear();
-  };
+  const validationSchema = Yup.object().shape({
+    creator: Yup.string()
+      .required("Creator is required")
+      .min(5, "Creator must be al least 6 charachters")
+      .max(10, "Creator must not exceed 10 characters"),
+    description: Yup.string()
+      .required("Description is required")
+      .min(5, "Description must be al least 6 charachters")
+      .max(20, "Description must not exceed 20 characters"),
+  });
+  const {
+    register,
+
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
   const clear = () => {
     setPostData({
       description: " ",
@@ -29,27 +45,47 @@ function Form() {
         autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit((e) => {
+          e.preventDefault();
+          dispatch(createPost(postData));
+          clear();
+        })}
       >
         <TextField
-          name="creator"
+          required
+          {...register("creator")}
+          error={errors.creator ? true : false}
           variant="outlined"
           label="Creator"
+          type="text"
+          name="creator"
+          id="creator"
           value={postData.creator}
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
           }
-        />
+        />{" "}
+        <Typography variant="inherit" color="textSecondary">
+          {errors.creator?.message}
+        </Typography>
         <TextField
-          name="description"
+          required
+          {...register("description")}
+          error={errors.description ? true : false}
           variant="outlined"
           label="Write your confession..."
+          type="text"
+          name="description"
+          id="description"
           fullWidth
           value={postData.description}
           onChange={(e) =>
             setPostData({ ...postData, description: e.target.value })
           }
         />
+        <Typography variant="inherit" color="textSecondary">
+          {errors.description?.message}
+        </Typography>
         <Button
           className={classes.button}
           variant="contained"
