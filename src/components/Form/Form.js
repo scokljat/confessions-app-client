@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Paper, TextField, Button, Typography } from "@material-ui/core";
 import { createPost } from "../../actions/posts";
-import useStyles from "./styles";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import useStyles from "./styles";
 function Form() {
   const [postData, setPostData] = useState({
     description: " ",
@@ -25,13 +25,11 @@ function Form() {
   });
   const {
     register,
-
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
-
   const clear = () => {
     setPostData({
       description: " ",
@@ -44,7 +42,7 @@ function Form() {
       <form
         autoComplete="off"
         noValidate
-        className={`${classes.root} ${classes.form}`}
+        className={classes.form}
         onSubmit={handleSubmit((e) => {
           e.preventDefault();
           dispatch(createPost(postData));
@@ -86,24 +84,26 @@ function Form() {
         <Typography variant="inherit" color="textSecondary">
           {errors.description?.message}
         </Typography>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          size="large"
-          type="submit"
-        >
-          Admit
-        </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="secondary"
-          size="small"
-          onClick={clear}
-        >
-          Clear
-        </Button>
+        <div>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+          >
+            Admit
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={clear}
+          >
+            Clear
+          </Button>
+        </div>
       </form>
     </Paper>
   );
