@@ -16,12 +16,12 @@ function Form() {
   const validationSchema = Yup.object().shape({
     creator: Yup.string()
       .required("Creator is required")
-      .min(5, "Creator must be al least 5 charachters")
+      .min(5, "Creator must be at least 5 charachters")
       .max(10, "Creator must not exceed 10 characters"),
     description: Yup.string()
-      .required("Description is required")
-      .min(5, "Description must be al least 6 charachters")
-      .max(20, "Description must not exceed 20 characters"),
+      .required("Confession is required")
+      .min(5, "Confession must be at least 6 charachters")
+      .max(20, "Confession must not exceed 20 characters"),
   });
   const {
     register,
