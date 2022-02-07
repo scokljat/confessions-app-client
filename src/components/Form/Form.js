@@ -16,11 +16,11 @@ function Form() {
   const validationSchema = Yup.object().shape({
     creator: Yup.string()
       .required("Creator is required")
-      .min(5, "Creator must be at least 5 charachters")
+      .min(3, "Creator must be at least 3 charachters")
       .max(10, "Creator must not exceed 10 characters"),
     description: Yup.string()
       .required("Confession is required")
-      .min(5, "Confession must be at least 6 charachters")
+      .min(5, "Confession must be at least 5 charachters")
       .max(20, "Confession must not exceed 20 characters"),
   });
   const {
@@ -49,6 +49,7 @@ function Form() {
         })}
       >
         <TextField
+          style={{ padding: "5px" }}
           required
           {...register("creator")}
           error={errors.creator ? true : false}
@@ -66,6 +67,7 @@ function Form() {
           {errors.creator?.message}
         </Typography>
         <TextField
+          style={{ padding: "5px" }}
           required
           {...register("description")}
           error={errors.description ? true : false}
