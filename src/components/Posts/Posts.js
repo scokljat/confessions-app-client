@@ -6,10 +6,7 @@ import useStyles from "./styles";
 function Posts({ setCurrentId }) {
   const posts = useSelector((state) => state.posts);
   const classes = useStyles();
-  console.log(posts);
-  return !posts.length ? (
-    <CircularProgress className={classes.circular} />
-  ) : (
+  return (
     <div className={classes.wrap}>
       {posts.map((post) => (
         <Grid key={post._id} item xs={12} sm={6}>
