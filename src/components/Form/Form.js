@@ -44,7 +44,6 @@ function Form() {
         noValidate
         className={classes.form}
         onSubmit={handleSubmit((e) => {
-          e.preventDefault();
           dispatch(createPost(postData));
           clear();
         })}
