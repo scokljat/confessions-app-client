@@ -6,6 +6,10 @@
 
 ## Getting started
 
+```
+git clone https://github.com/scokljat/confessions-app-client.git
+```
+
 .env
 
     REACT_APP_API_URL = REACT_APP_API_URL
