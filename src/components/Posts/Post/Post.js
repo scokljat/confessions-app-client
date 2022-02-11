@@ -4,7 +4,9 @@ import { Button, Card, Typography } from "@material-ui/core";
 import ThumUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownAltIcon from "@material-ui/icons/ThumbDownAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
+
 import { deletePost, likePost, unlikePost } from "../../../actions/posts";
+
 import useStyles from "./styles";
 
 function Post({ post, setCurrentId }) {
@@ -14,7 +16,6 @@ function Post({ post, setCurrentId }) {
   return (
     <Card className={classes.card}>
       <Typography variant="h6" className={classes.creator}>
-        {" "}
         {post.creator}
       </Typography>
       <Typography variant="body2" className={classes.time}>
@@ -28,10 +29,9 @@ function Post({ post, setCurrentId }) {
           className={classes.buttons}
           onClick={() => dispatch(likePost(post._id))}
         >
-          {" "}
           <ThumUpAltIcon fontSize="small" />
           {post.likeCount} Like
-        </Button>{" "}
+        </Button>
         <Button
           className={classes.buttons}
           onClick={() => dispatch(unlikePost(post._id))}

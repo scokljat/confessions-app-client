@@ -2,7 +2,9 @@ import { useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 
 import Post from "./Post/Post";
+
 import useStyles from "./styles";
+
 function Posts({ setCurrentId }) {
   const posts = useSelector((state) => state.posts);
   const classes = useStyles();

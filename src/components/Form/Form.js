@@ -2,10 +2,24 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Paper, TextField, Button, Typography } from "@material-ui/core";
-import { createPost } from "../../actions/posts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+
+import { createPost } from "../../actions/posts";
+
 import useStyles from "./styles";
+
+const validationSchema = Yup.object().shape({
+  creator: Yup.string()
+    .required("Creator is required")
+    .min(3, "Creator must be at least 3 charachters")
+    .max(10, "Creator must not exceed 10 characters"),
+  description: Yup.string()
+    .required("Confession is required")
+    .min(5, "Confession must be at least 5 charachters")
+    .max(20, "Confession must not exceed 20 characters"),
+});
+
 function Form() {
   const [postData, setPostData] = useState({
     description: " ",
@@ -13,16 +27,7 @@ function Form() {
   });
   const classes = useStyles();
   const dispatch = useDispatch();
-  const validationSchema = Yup.object().shape({
-    creator: Yup.string()
-      .required("Creator is required")
-      .min(3, "Creator must be at least 3 charachters")
-      .max(10, "Creator must not exceed 10 characters"),
-    description: Yup.string()
-      .required("Confession is required")
-      .min(5, "Confession must be at least 5 charachters")
-      .max(20, "Confession must not exceed 20 characters"),
-  });
+
   const {
     register,
     handleSubmit,

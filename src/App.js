@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Container, AppBar, Typography } from "@material-ui/core";
+
 import Form from "./components/Form/Form";
 import Posts from "./components/Posts/Posts";
-import { useDispatch } from "react-redux";
 import { getPosts } from "./actions/posts";
+
 import useStyles from "./styles";
+
 function App() {
   const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
